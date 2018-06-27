@@ -11,7 +11,7 @@ tags:
   - name: Ratings
     description: Access Ratings of AIMA Exercises
 schemes:
-  - http
+  - https
 paths:
   '/chapter/{chapterID}/':
     get:
@@ -57,10 +57,12 @@ paths:
           minimum: 1
           format: int64
       responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Exercise'
         '400':
           description: Invalid ID supplied
-        '404':
-          description: Order not found
   '/chapter/{chapterID}/exercise/{exerciseID}':
     post:
       tags:
@@ -120,11 +122,9 @@ paths:
         '200':
           description: successful operation
           schema:
-            $ref: '#/definitions/Exercise'
+            $ref: '#/definitions/Ratings'
         '400':
           description: Invalid ID supplied
-        '404':
-          description: Chapter not found
   '/rating/{chapterID}/{exerciseID}':
     get:
       tags:
@@ -155,11 +155,9 @@ paths:
         '200':
           description: successful operation
           schema:
-            $ref: '#/definitions/Exercise'
+            $ref: '#/definitions/Ratings'
         '400':
           description: Invalid ID supplied
-        '404':
-          description: Chapter not found
     post:
       tags:
         - Ratings
@@ -185,10 +183,12 @@ paths:
           minimum: 1
           format: int64
       responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Ratings'
         '400':
           description: Invalid ID supplied
-        '404':
-          description: Order not found
 definitions:
   Exercise:
     type: object
