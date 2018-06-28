@@ -54,6 +54,7 @@ app.get('/rating/:chapterID',(request,response) => {
       } else {
         response.send(doc.data());
       }
+      return
     })
     .catch(err => {
       console.log('Error getting document', err);
@@ -79,6 +80,7 @@ app.get('/rating/:chapterID/:exerciseID',(request,response) => {
         obj["rating"]=doc.data()[obj["exercise"]] || 0
         response.send(obj);
       }
+      return
     })
     .catch(err => {
       console.log('Error getting document', err);
@@ -110,10 +112,15 @@ app.post('/rating/:chapterID/:exerciseID',(request,response) => {
       	docRef.set(o).then(()=>{
       		obj["rating"] = o[obj["exercise"]]
       		response.send(obj);
-      	})
+      		return
+      	}).catch(err => {
+	      console.log('Error writing document', err);
+	      response.send("ERROR");
+	    });
         // obj["rating"]=doc.data()[obj["exercise"]] || 0
         // response.send(obj);
       }
+      return
     })
     .catch(err => {
       console.log('Error getting document', err);
