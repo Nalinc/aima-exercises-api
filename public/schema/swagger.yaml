@@ -27,10 +27,8 @@ paths:
           in: path
           description: ID of the chapter that needs to be fetched
           required: true
-          type: integer
-          maximum: 10
+          type: string
           minimum: 1
-          format: int64
       responses:
         '200':
           description: successful operation
@@ -53,9 +51,8 @@ paths:
           in: path
           description: ID of the chapter that needs to be deleted
           required: true
-          type: integer
+          type: string
           minimum: 1
-          format: int64
       responses:
         '200':
           description: successful operation
@@ -77,16 +74,14 @@ paths:
           in: path
           description: ID of the chapter that needs to be deleted
           required: true
-          type: integer
+          type: string
           minimum: 1
-          format: int64
         - name: exerciseID
           in: path
           description: ID of the chapter that needs to be deleted
           required: true
-          type: integer
+          type: string
           minimum: 1
-          format: int64
         - in: body
           name: body
           description: order placed for purchasing the pet
@@ -114,10 +109,8 @@ paths:
           in: path
           description: ID of the chapter that contains the exercise(s)
           required: true
-          type: integer
-          maximum: 10
+          type: string
           minimum: 1
-          format: int64
       responses:
         '200':
           description: successful operation
@@ -139,18 +132,14 @@ paths:
           in: path
           description: ID of the chapter that contains the exercise(s)
           required: true
-          type: integer
-          maximum: 10
+          type: string
           minimum: 1
-          format: int64
         - name: exerciseID
           in: path
           description: ID of the exercise that needs to be rated
           required: true
-          type: integer
-          maximum: 10
+          type: string
           minimum: 1
-          format: int64
       responses:
         '200':
           description: successful operation
@@ -171,17 +160,14 @@ paths:
           in: path
           description: ID of the chapter that contains the exercise(s)
           required: true
-          type: integer
+          type: string
           minimum: 1
-          format: int64
         - name: exerciseID
           in: path
           description: ID of the exercise that needs to be rated
           required: true
-          type: integer
-          maximum: 10
+          type: string
           minimum: 1
-          format: int64
       responses:
         '200':
           description: successful operation
@@ -199,8 +185,7 @@ definitions:
       label:
         type: string
       chapter:
-        type: integer
-        format: int32
+        type: string
       last_modified:
         type: string
         format: date-time

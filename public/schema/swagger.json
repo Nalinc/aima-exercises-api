@@ -38,10 +38,8 @@
             "in": "path",
             "description": "ID of the chapter that needs to be fetched",
             "required": true,
-            "type": "integer",
-            "maximum": 10,
-            "minimum": 1,
-            "format": "int64"
+            "type": "string",
+            "minimum": 1
           }
         ],
         "responses": {
@@ -75,9 +73,8 @@
             "in": "path",
             "description": "ID of the chapter that needs to be deleted",
             "required": true,
-            "type": "integer",
-            "minimum": 1,
-            "format": "int64"
+            "type": "string",
+            "minimum": 1
           }
         ],
         "responses": {
@@ -110,18 +107,16 @@
             "in": "path",
             "description": "ID of the chapter that needs to be deleted",
             "required": true,
-            "type": "integer",
-            "minimum": 1,
-            "format": "int64"
+            "type": "string",
+            "minimum": 1
           },
           {
             "name": "exerciseID",
             "in": "path",
             "description": "ID of the chapter that needs to be deleted",
             "required": true,
-            "type": "integer",
-            "minimum": 1,
-            "format": "int64"
+            "type": "string",
+            "minimum": 1
           },
           {
             "in": "body",
@@ -163,10 +158,8 @@
             "in": "path",
             "description": "ID of the chapter that contains the exercise(s)",
             "required": true,
-            "type": "integer",
-            "maximum": 10,
-            "minimum": 1,
-            "format": "int64"
+            "type": "string",
+            "minimum": 1
           }
         ],
         "responses": {
@@ -199,20 +192,16 @@
             "in": "path",
             "description": "ID of the chapter that contains the exercise(s)",
             "required": true,
-            "type": "integer",
-            "maximum": 10,
-            "minimum": 1,
-            "format": "int64"
+            "type": "string",
+            "minimum": 1
           },
           {
             "name": "exerciseID",
             "in": "path",
             "description": "ID of the exercise that needs to be rated",
             "required": true,
-            "type": "integer",
-            "maximum": 10,
-            "minimum": 1,
-            "format": "int64"
+            "type": "string",
+            "minimum": 1
           }
         ],
         "responses": {
@@ -243,19 +232,16 @@
             "in": "path",
             "description": "ID of the chapter that contains the exercise(s)",
             "required": true,
-            "type": "integer",
-            "minimum": 1,
-            "format": "int64"
+            "type": "string",
+            "minimum": 1
           },
           {
             "name": "exerciseID",
             "in": "path",
             "description": "ID of the exercise that needs to be rated",
             "required": true,
-            "type": "integer",
-            "maximum": 10,
-            "minimum": 1,
-            "format": "int64"
+            "type": "string",
+            "minimum": 1
           }
         ],
         "responses": {
@@ -284,8 +270,7 @@
           "type": "string"
         },
         "chapter": {
-          "type": "integer",
-          "format": "int32"
+          "type": "string"
         },
         "last_modified": {
           "type": "string",
