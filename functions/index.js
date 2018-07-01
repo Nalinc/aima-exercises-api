@@ -126,8 +126,6 @@ app.post('/rating/:chapterID/:exerciseID',(request,response) => {
       console.log('Error getting document', err);
       response.send("ERROR");
     });
-
-	response.send(obj);
 })
 
 // Create and Deploy Your First Cloud Functions
