@@ -182,10 +182,19 @@ definitions:
       id:
         type: integer
         format: int64
-      label:
+      exercise:
         type: string
       chapter:
         type: string
+      contributors:
+        type: array
+        items:
+          type: object
+          properties:
+            name:
+              type: string
+            email:
+              type: string
       last_modified:
         type: string
         format: date-time
