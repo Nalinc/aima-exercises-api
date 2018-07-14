@@ -44,19 +44,48 @@ paths:
         - Exercise
       summary: Fetch the exercise from a chapter
       description: to-do
-      operationId: placeOrder
+      operationId: getExercise
       produces:
         - application/json
       parameters:
         - name: chapterID
           in: path
-          description: ID of the chapter that needs to be deleted
+          description: ID of the chapter that needs to be fetched
           required: true
           type: string
           minimum: 1
         - name: exerciseID
           in: path
-          description: ID of the chapter that needs to be deleted
+          description: ID of the chapter that needs to be fetched
+          required: true
+          type: string
+          minimum: 1
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Exercise'
+        '400':
+          description: Invalid Call
+  '/answer/chapter/{chapterID}/exercise/{exerciseID}':
+    get:
+      tags:
+        - Exercise
+      summary: Fetch the exercise from a chapter
+      description: to-do
+      operationId: getAnswer
+      produces:
+        - application/json
+      parameters:
+        - name: chapterID
+          in: path
+          description: ID of the chapter that needs to be fetched
+          required: true
+          type: string
+          minimum: 1
+        - name: exerciseID
+          in: path
+          description: ID of the chapter that needs to be fetched
           required: true
           type: string
           minimum: 1
