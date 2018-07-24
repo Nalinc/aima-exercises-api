@@ -1,6 +1,8 @@
 const functions = require('firebase-functions');
 const express = require('express');
 const admin = require('firebase-admin');
+var chapter_map = require('./chapter_map')
+const httprequest = require('request')
 const app = express();
 admin.initializeApp(functions.config().firebase);
 
@@ -8,7 +10,7 @@ const db = admin.firestore();
 
 responseObj = {
   "id": 0,
-  "label": "string",
+  "exercise": "string",
   "chapter": 0,
   "last_modified": "2018-06-26T20:22:45.307Z",
   "content": "string",
@@ -23,27 +25,42 @@ app.use(function(req, res, next) {
    next();
 });
 
-app.get('/question/chapter/:chapterID',(request,response) => {
-	obj =  JSON.parse(JSON.stringify(responseObj))
-	obj["id"] = new Date().getTime()
-	obj["chapter"] = request.params.chapterID
-	response.send(obj);
-})
-
 app.get('/question/chapter/:chapterID/exercise/:exerciseID',(request,response) => {
 	obj =  JSON.parse(JSON.stringify(responseObj))
 	obj["id"] = new Date().getTime()
-	obj["chapter"] = request.params.chapterID
-	obj["label"] = request.params.exerciseID
-	response.send(obj);
+	obj["chapter"] = chapter_map[request.params.chapterID]
+	obj["exercise"] = request.params.exerciseID
+  url = "https://raw.githubusercontent.com/aimacode/aima-exercises/gh-pages/markdown/"+obj["chapter"]+"/exercises/"+obj["exercise"]+"/question.md"
+
+  httprequest(url, { json: true }, (err, res, body) => {
+      if (err || res.statusCode === "404") {
+        response.status(400).send("Invalid Call");
+      }
+      else{
+        obj["content"] = body
+        obj["complete"] = true
+        response.send(obj);
+      }
+  });
 })
 
 app.get('/answer/chapter/:chapterID/exercise/:exerciseID',(request,response) => {
   obj =  JSON.parse(JSON.stringify(responseObj))
   obj["id"] = new Date().getTime()
-  obj["chapter"] = request.params.chapterID
-  obj["label"] = request.params.exerciseID
-  response.send(obj);
+  obj["chapter"] = chapter_map[request.params.chapterID]
+  obj["exercise"] = request.params.exerciseID
+  url = "https://raw.githubusercontent.com/aimacode/aima-exercises/gh-pages/markdown/"+obj["chapter"]+"/exercises/"+obj["exercise"]+"/answer.md"
+
+  httprequest(url, { json: true }, (err, res, body) => {
+      if (err || res.statusCode === "404") {
+        response.status(400).send("Invalid Call");
+      }
+      else{
+        obj["content"] = body
+        obj["complete"] = true
+        response.send(obj);
+      }
+  });
 })
 
 app.get('/rating/:chapterID',(request,response) => {

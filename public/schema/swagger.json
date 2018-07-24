@@ -21,43 +21,6 @@
     "https"
   ],
   "paths": {
-    "/question/chapter/{chapterID}/": {
-      "get": {
-        "tags": [
-          "Exercise"
-        ],
-        "summary": "Find exercises by chapter number",
-        "description": "to-do get description",
-        "operationId": "getExercisesByChapters",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "chapterID",
-            "in": "path",
-            "description": "ID of the chapter that needs to be fetched",
-            "required": true,
-            "type": "string",
-            "minimum": 1
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "schema": {
-              "$ref": "#/definitions/Exercise"
-            }
-          },
-          "400": {
-            "description": "Invalid ID supplied"
-          },
-          "404": {
-            "description": "Chapter not found"
-          }
-        }
-      }
-    },
     "/question/chapter/{chapterID}/exercise/{exerciseID}": {
       "get": {
         "tags": [
