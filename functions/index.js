@@ -23,26 +23,27 @@ app.use(function(req, res, next) {
    next();
 });
 
-app.get('/chapter/:chapterID',(request,response) => {
+app.get('/question/chapter/:chapterID',(request,response) => {
 	obj =  JSON.parse(JSON.stringify(responseObj))
 	obj["id"] = new Date().getTime()
 	obj["chapter"] = request.params.chapterID
 	response.send(obj);
 })
 
-app.delete('/chapter/:chapterID',(request,response) => {
-	obj =  JSON.parse(JSON.stringify(responseObj))
-	obj["id"] = new Date().getTime()
-	obj["chapter"] = request.params.chapterID
-	response.send(obj);
-})
-
-app.post('/chapter/:chapterID/exercise/:exerciseID',(request,response) => {
+app.get('/question/chapter/:chapterID/exercise/:exerciseID',(request,response) => {
 	obj =  JSON.parse(JSON.stringify(responseObj))
 	obj["id"] = new Date().getTime()
 	obj["chapter"] = request.params.chapterID
 	obj["label"] = request.params.exerciseID
 	response.send(obj);
+})
+
+app.get('/answer/chapter/:chapterID/exercise/:exerciseID',(request,response) => {
+  obj =  JSON.parse(JSON.stringify(responseObj))
+  obj["id"] = new Date().getTime()
+  obj["chapter"] = request.params.chapterID
+  obj["label"] = request.params.exerciseID
+  response.send(obj);
 })
 
 app.get('/rating/:chapterID',(request,response) => {
