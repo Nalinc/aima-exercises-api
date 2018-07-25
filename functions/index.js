@@ -30,17 +30,24 @@ app.get('/question/chapter/:chapterID/exercise/:exerciseID',(request,response) =
 	obj["id"] = new Date().getTime()
 	obj["chapter"] = chapter_map[request.params.chapterID]
 	obj["exercise"] = request.params.exerciseID
-  url = "https://raw.githubusercontent.com/aimacode/aima-exercises/gh-pages/markdown/"+obj["chapter"]+"/exercises/"+obj["exercise"]+"/question.md"
-
-  httprequest(url, { json: true }, (err, res, body) => {
+  url = "http://raw.githubusercontent.com/aimacode/aima-exercises/gh-pages/markdown/"+obj["chapter"]+"/exercises/"+obj["exercise"]+"/question.md"
+  options = {
+    url: url,
+    method: 'GET',
+    headers: {
+        'Accept': 'application/json',
+        'Accept-Charset': 'utf-8',
+        'User-Agent': 'aima-exercises'
+    }
+  }
+  httprequest(options, (err, res, body) => {
       if (err || res.statusCode === "404") {
-        response.status(400).send("Invalid Call");
+        // response.status(400).send(err);
+        console.log(err)
       }
-      else{
-        obj["content"] = body
-        obj["complete"] = true
-        response.send(obj);
-      }
+      obj["content"] = body || ""
+      obj["complete"] = true
+      response.send(obj);
   });
 })
 
@@ -49,17 +56,27 @@ app.get('/answer/chapter/:chapterID/exercise/:exerciseID',(request,response) => 
   obj["id"] = new Date().getTime()
   obj["chapter"] = chapter_map[request.params.chapterID]
   obj["exercise"] = request.params.exerciseID
-  url = "https://raw.githubusercontent.com/aimacode/aima-exercises/gh-pages/markdown/"+obj["chapter"]+"/exercises/"+obj["exercise"]+"/answer.md"
-
-  httprequest(url, { json: true }, (err, res, body) => {
+  url = "http://raw.githubusercontent.com/aimacode/aima-exercises/gh-pages/markdown/"+obj["chapter"]+"/exercises/"+obj["exercise"]+"/answer.md"
+  options = {
+    url: url,
+    method: 'GET',
+    qs:{"ref":"gh-pages"},
+    headers: {
+        'Accept': 'application/json',
+        'Accept-Charset': 'utf-8',
+        'User-Agent': 'aima-exercises'
+    }
+  }
+  httprequest(options, (err, res, body) => {
       if (err || res.statusCode === "404") {
-        response.status(400).send("Invalid Call");
+        // response.status(400).send(err);
+        console.log(err)
       }
-      else{
-        obj["content"] = body
-        obj["complete"] = true
-        response.send(obj);
-      }
+      // var b = new Buffer(JSON.parse(body)["content"], 'base64')
+      // body = b.toString()
+      obj["content"] = body || "Not Available"
+      obj["complete"] = true
+      response.send(obj);
   });
 })
 
