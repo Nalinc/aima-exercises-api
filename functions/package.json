@@ -10,9 +10,11 @@
     "logs": "firebase functions:log"
   },
   "dependencies": {
+    "elasticlunr": "^0.9.5",
     "express": "^4.16.3",
     "firebase-admin": "^5.12.1",
     "firebase-functions": "^1.1.0",
+    "lunr": "^2.3.1",
     "q": "^1.5.1",
     "request": "^2.87.0"
   },

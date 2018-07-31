@@ -4,19 +4,10 @@ const admin = require('firebase-admin');
 var chapter_map = require('./chapter_map')
 const httprequest = require('request')
 const app = express();
+const search = require('./search')
 admin.initializeApp(functions.config().firebase);
 
 const db = admin.firestore();
-
-responseObj = {
-  "id": 0,
-  "exercise": "string",
-  "chapter": 0,
-  "last_modified": "2018-06-26T20:22:45.307Z",
-  "content": "string",
-  "type": "author_created",
-  "complete": false
-}
 
 app.use(function(req, res, next) {
    res.header("Access-Control-Allow-Origin", "*");
@@ -25,60 +16,7 @@ app.use(function(req, res, next) {
    next();
 });
 
-app.get('/question/chapter/:chapterID/exercise/:exerciseID',(request,response) => {
-	obj =  JSON.parse(JSON.stringify(responseObj))
-	obj["id"] = new Date().getTime()
-	obj["chapter"] = chapter_map[request.params.chapterID]
-	obj["exercise"] = request.params.exerciseID
-  url = "http://raw.githubusercontent.com/aimacode/aima-exercises/gh-pages/markdown/"+obj["chapter"]+"/exercises/"+obj["exercise"]+"/question.md"
-  options = {
-    url: url,
-    method: 'GET',
-    headers: {
-        'Accept': 'application/json',
-        'Accept-Charset': 'utf-8',
-        'User-Agent': 'aima-exercises'
-    }
-  }
-  httprequest(options, (err, res, body) => {
-      if (err || res.statusCode === "404") {
-        // response.status(400).send(err);
-        console.log(err)
-      }
-      obj["content"] = body || ""
-      obj["complete"] = true
-      response.send(obj);
-  });
-})
-
-app.get('/answer/chapter/:chapterID/exercise/:exerciseID',(request,response) => {
-  obj =  JSON.parse(JSON.stringify(responseObj))
-  obj["id"] = new Date().getTime()
-  obj["chapter"] = chapter_map[request.params.chapterID]
-  obj["exercise"] = request.params.exerciseID
-  url = "http://raw.githubusercontent.com/aimacode/aima-exercises/gh-pages/markdown/"+obj["chapter"]+"/exercises/"+obj["exercise"]+"/answer.md"
-  options = {
-    url: url,
-    method: 'GET',
-    qs:{"ref":"gh-pages"},
-    headers: {
-        'Accept': 'application/json',
-        'Accept-Charset': 'utf-8',
-        'User-Agent': 'aima-exercises'
-    }
-  }
-  httprequest(options, (err, res, body) => {
-      if (err || res.statusCode === "404") {
-        // response.status(400).send(err);
-        console.log(err)
-      }
-      // var b = new Buffer(JSON.parse(body)["content"], 'base64')
-      // body = b.toString()
-      obj["content"] = body || "Not Available"
-      obj["complete"] = true
-      response.send(obj);
-  });
-})
+app.get('/search/',search.searchController)
 
 app.get('/rating/:chapterID',(request,response) => {
 	obj = {

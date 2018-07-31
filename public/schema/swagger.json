@@ -9,7 +9,7 @@
   "basePath": "/",
   "tags": [
     {
-      "name": "Exercise",
+      "name": "Search",
       "description": "Access to AIMA Exercises"
     },
     {
@@ -21,12 +21,12 @@
     "https"
   ],
   "paths": {
-    "/question/chapter/{chapterID}/exercise/{exerciseID}": {
+    "/search/": {
       "get": {
         "tags": [
-          "Exercise"
+          "Search"
         ],
-        "summary": "Fetch the exercise from a chapter",
+        "summary": "Fetch exercises containing the search query",
         "description": "to-do",
         "operationId": "getExercise",
         "produces": [
@@ -34,59 +34,9 @@
         ],
         "parameters": [
           {
-            "name": "chapterID",
-            "in": "path",
-            "description": "ID of the chapter that needs to be fetched",
-            "required": true,
-            "type": "string",
-            "minimum": 1
-          },
-          {
-            "name": "exerciseID",
-            "in": "path",
-            "description": "ID of the chapter that needs to be fetched",
-            "required": true,
-            "type": "string",
-            "minimum": 1
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "schema": {
-              "$ref": "#/definitions/Exercise"
-            }
-          },
-          "400": {
-            "description": "Invalid Call"
-          }
-        }
-      }
-    },
-    "/answer/chapter/{chapterID}/exercise/{exerciseID}": {
-      "get": {
-        "tags": [
-          "Exercise"
-        ],
-        "summary": "Fetch the exercise from a chapter",
-        "description": "to-do",
-        "operationId": "getAnswer",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "chapterID",
-            "in": "path",
-            "description": "ID of the chapter that needs to be fetched",
-            "required": true,
-            "type": "string",
-            "minimum": 1
-          },
-          {
-            "name": "exerciseID",
-            "in": "path",
-            "description": "ID of the chapter that needs to be fetched",
+            "name": "query",
+            "in": "query",
+            "description": "Search query to look for",
             "required": true,
             "type": "string",
             "minimum": 1
